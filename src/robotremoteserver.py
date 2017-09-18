@@ -70,9 +70,8 @@ class RobotRemoteServer(object):
                             ``Stop Remote Server`` keyword and
                             ``stop_remote_server`` XML-RPC method.
         """
-        self._library = list()
-        for library_ in library:
-            self._library.append(RemoteLibraryFactory(library_))
+        self._library = [RemoteLibraryFactory(library_)
+                         for library_ in library]
         self._server = StoppableXMLRPCServer(host, int(port))
         self._register_functions(self._server)
         self._port_file = port_file
